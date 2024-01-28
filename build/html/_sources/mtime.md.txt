@@ -1,0 +1,247 @@
+按照 RISC-V 定义，RV32 和 RV64 均需要提供一个 64 位系统定时器 MTIME，该定时器在处理器核局部中断控制器（Core Local Interruptor 简称 CLINT）中实现。
+
+系统计时器定义了两个 64 位宽的寄存器 MTIME 和 MTIMECMP。
+
+1. MTIME 是一个可读可写的计数器，其中的数值以一定的时间间隔递增，计数器计满后会回绕。
+
+![mtime](/img/risc-v/risc-v/mtime/mtime.png)
+
+2. 一个机器模式计时器比较寄存器（MTIMECMPH，MTIMECMPL）和一个 64 位的超级用户模式计时器比较寄存器（STIMECMPH，STIMECMPL）。
+
+![mtimecmp](/img/risc-v/risc-v/mtime/mtimecmp.png)
+
+通过比较系统计时器的当前值（MTIME）与比较值寄存器（MTIMECMP/STIMECMP）的值来确定是否产生计时器中断。
+- 当系统计时器的值小于比较寄存器（MTIMECMP/STIMECMP）的值时不产生中断。
+- 当系统计时器的值大于等于比较寄存器（MTIMECMP/STIMECMP）的值时产生对应的计时器中断。
+
+在机器模式下，只有当 MTIMECMP 寄存器被重新写入后，MIP 寄存器中的时钟中断标志位才会被清除。
+
+机器模式下可以访问/修改所有计时器中断相关的寄存器；带超级用户模式的架构超级用户模式下只具有访问/修改超级用户模式计时器比较寄存器的权限。
+
+RISC-V 特权 ISA 规范 [https://github.com/riscv/riscv-isa-manual/releases/download/riscv-isa-release-056b6ff-2023-10-02/riscv-privileged.pdf](https://github.com/riscv/riscv-isa-manual/releases/download/riscv-isa-release-056b6ff-2023-10-02/riscv-privileged.pdf) 中 3.2.1 Machine Timer Registers (mtime and mtimecmp) 中可以找到系统计时器的规范。
+
+在 RISC-V 规范中并没有定义 MTIME 寄存器和 MTIMECMP/STIMECMP 寄存器为 CSR 寄存器，而是定义其为存储器地址映射（Machine-Level Memory-Mapped Registers）的系统寄存器，具体的存储器音声地址 RISC-V 架构没有规定，是有 SOC 设计厂商自己定义的。
+
+MTIME 和 MTIMECMP 无论是 RV32E、RV32I、RV64、RV128 总是 64 位的。对用作计数的这两个寄存器而言，64 位已经是天文数字，在产品的整个生命周期内都不会产生溢出。假设驱动 MTIME 的时钟频率是 10GHz（目前还没有哪个CPU主频能到 10GHz 的吧），那么要让 64 位的 MTIME 溢出，那么需要 0x10000000000000000 / 10000000000 / 60 / 60 / 24 / 365 年，也就是 58 年。
+
+
+## E907中的系统计时器
+在 E907 中 CLINT 中断占据 64KB 内存空间。高 4 位地址空间由系统集成决定，低位地址映射如下表所示。所有寄存器仅支持字对齐的访问。
+
+CLINT 寄存器存储器映射地址表:
+
+| 地址 [27:0] | 名称 | 类型 | 初始值 | 描述 |
+| ---- | --- | --- | ------ | ---- |
+| 0x0000 | MSIP | 读/写 | 0x00000000 | 机器模式软件中断配置寄存器：高位硬件固定为 0， bit[0] 有效。 |
+| Reserved | - | - | - | - |
+| 0x4000 | MTIMECMPLO | 读/写 | 0xFFFFFFFF | 机器模式计时器：比较值寄存器 (低 32 位)。 |
+| 0x4004 | MTIMECMPHI | 读/写 | 0xFFFFFFFF | 机器模式计时器：比较值寄存器 (高 32 位)。 |
+| Reserved | - | - | - | - |
+| 0xBFF8 | MTIMELO | 读 | 0x00000000 | 机器模式计时器：当前值寄存器 (低 32 位)，该寄存器值为 pad_cpu_sys_cnt[31:0] 信号的值。 |
+| 0xBFFC | MTIMEHI | 读 | 0x00000000 | 机器模式计时器：当前值寄存器 (高 32 位)，该寄存器值为 pad_cpu_sys_cnt[63:32] 信号的值。 |
+| Reserved | - | - | - | - |
+
+### 操作示例
+```c
+typedef struct
+{
+    __IOM unsigned long long MTIMECMP; /*!< Offset: 0x000 (R/W) Timer compare register */
+    uint32_t RESERVED[8187];
+    __IM unsigned long long MTIME; /*!< Offset: 0x7FFC (R)  Timer current register */
+} CORET_Type;
+
+#define CORET_BASE  (0xE0004000UL)         /*!< CORET Base Address */
+#define CORET  ((CORET_Type *)CORET_BASE)   /*!< SysTick configuration struct */
+
+__STATIC_INLINE uint32_t csi_coret_config(uint32_t ticks, int32_t IRQn)
+{
+    if ((CORET->MTIMECMP != 0) && (CORET->MTIMECMP != 0xffffffffffffffff)) {
+        CORET->MTIMECMP = CORET->MTIMECMP + ticks;
+    } else {
+        CORET->MTIMECMP = CORET->MTIME + ticks;
+    }
+
+    return (0UL);
+}
+
+__STATIC_INLINE uint32_t csi_coret_config_use(uint32_t ticks, int32_t IRQn)
+{
+    CORET->MTIMECMP = CORET->MTIME + ticks;
+
+    return (0UL);
+}
+```
+
+## C906中的系统计时器
+
+在 C906 中 CLINT 占据 64KB 内存空间，其高 13 位地址由 SoC 集成 C906 时硬件指定，低 27 位地址映射如下表所示。所有寄存器仅支持字对齐的访问。
+
+CLINT 寄存器存储器映射地址表:
+| 地址 | 名称 | 属性 | 初始值 | 描述 |
+| ---- | --- | --- | ------ | ---- |
+| 0x4000000 | MSIP0 | 读/写 | 0x00000000 | 机器模式软件中断配置寄存器高位绑 0， bit[0] 有效 |
+| Reserved | - | - | - | - |
+| 0x4004000 | MTIMECMPL0 | 读/写 | 0xFFFFFFFF | 机器模式系统计时器比较值寄存器 (低 32 位) |
+| 0x4004004 | MTIMECMPH0 | 读/写 | 0xFFFFFFFF | 机器模式系统计时器比较值寄存器 (高 32 位) |
+| Reserved | - | - | - | - |
+| 0x400C000 | SSIP0 | 读/写 | 0x00000000 | 超级用户模式软件中断配置寄存器高位绑 0， bit[0] 有效 |
+| Reserved | - | - | - | - |
+| 0x400D000 | STIMECMPL0 | 读/写 | 0xFFFFFFFF | 超级用户模式系统计时器比较值寄存器 (低 32 位) |
+| 0x400D004 | STIMECMPH0 | 读/写 | 0xFFFFFFFF | 超级用户模式系统计时器比较值寄存器 (高 32 位) |
+| Reserved | - | - | - | - |
+
+在 C906 的 CLINT 寄存器存储器有映射地址表并没有看到上面所诉的 MTIME 寄存器。在网上查询到相关信息为：`C906不是完全按照CLIC的标准定义这一块的，它使用了CLIC+PLIC，并没有把 MTIME 的地址给映射出来，而是通过 rdtime 伪指令，这条指令编译的时候会扩展为 csr 指令读取 C906 的扩展寄存器，而这个扩展寄存器就是和 MTIME 绑定的。`
+
+### 操作示例
+```c
+typedef struct
+{
+    __IOM uint32_t MSIP0;
+    __IOM uint32_t MSIP1;
+    __IOM uint32_t MSIP2;
+    __IOM uint32_t MSIP3;
+    uint32_t RESERVED0[(0x4004000 - 0x400000C) / 4 - 1];
+    __IOM uint32_t MTIMECMPL0;
+    __IOM uint32_t MTIMECMPH0;
+    __IOM uint32_t MTIMECMPL1;
+    __IOM uint32_t MTIMECMPH1;
+    __IOM uint32_t MTIMECMPL2;
+    __IOM uint32_t MTIMECMPH2;
+    __IOM uint32_t MTIMECMPL3;
+    __IOM uint32_t MTIMECMPH3;
+    uint32_t RESERVED1[(0x400C000 - 0x400401C) / 4 - 1];
+    __IOM uint32_t SSIP0;
+    __IOM uint32_t SSIP1;
+    __IOM uint32_t SSIP2;
+    __IOM uint32_t SSIP3;
+    uint32_t RESERVED2[(0x400D000 - 0x400C00C) / 4 - 1];
+    __IOM uint32_t STIMECMPL0;
+    __IOM uint32_t STIMECMPH0;
+    __IOM uint32_t STIMECMPL1;
+    __IOM uint32_t STIMECMPH1;
+    __IOM uint32_t STIMECMPL2;
+    __IOM uint32_t STIMECMPH2;
+    __IOM uint32_t STIMECMPL3;
+    __IOM uint32_t STIMECMPH3;
+} CORET_Type;
+
+#define CORET_BASE (PLIC_BASE + 0x4000000UL) /*!< CORET Base Address */
+#define PLIC_BASE  (0x00E0000000UL)          /*!< PLIC Base Address */
+
+#define CORET ((CORET_Type *)CORET_BASE) /*!< SysTick configuration struct */
+
+__STATIC_INLINE uint32_t csi_coret_config(uint32_t ticks, int32_t IRQn)
+{
+    uint64_t value = (((uint64_t)CORET->MTIMECMPH0) << 32) + (uint64_t)CORET->MTIMECMPL0;
+
+    value = value + (uint64_t)ticks;
+    CORET->MTIMECMPH0 = (uint32_t)(value >> 32);
+    CORET->MTIMECMPL0 = (uint32_t)value;
+    return (0UL);
+}
+
+__STATIC_INLINE uint32_t csi_coret_config_use(uint32_t ticks, int32_t IRQn)
+{
+    uint64_t value;
+    __ASM volatile("csrr %0, time"
+                   : "=r"(value));
+    value = value + (uint64_t)ticks;
+    CORET->MTIMECMPH0 = (uint32_t)(value >> 32);
+    CORET->MTIMECMPL0 = (uint32_t)value;
+
+    return (0UL);
+}
+```
+
+> 注：经测试 C906 架构的 MTIMECMP 无法通过 64 位写入 MTIMECMP，需要分成 32bit 的 MTIMECMPH/MTIMECMPL 分别写入，原因需进一步深挖。
+
+## RV32中的系统计时器
+
+RV64 或 RV128 访问 MTIME 或 MTIMECMP 只需要一条指令，不会有什么问题。
+
+RV32 架构 读写 MTIME 或 MTIMECMP 需要将这两个寄存器拆成两个 32 位寄存器来访问，这需要两条指令，如果真好碰上低 32 位要进位的情况，那么就会产生问题，访问的结果会产生巨大的偏差。
+
+### 写 MTIMECMP
+
+写 MTIMECMP 操作在软件开发中是最常用的操作，用于设置计时器中断周期和清除计时器中断等。
+
+如何正确地写 MTIMECMP 在 riscv-privileged.pdf 文档中 3.2.1 Machine Timer Registers (mtime and mtimecmp) 中有明确的说明：
+
+```shell
+In RV32, memory-mapped writes to mtimecmp modify only one 32-bit part of the register. The following code sequence sets a 64-bit mtimecmp value without spuriously generating a timer interrupt due to the intermediate value of the comparand:
+For RV64, naturally aligned 64-bit memory accesses to the mtime and mtimecmp registers are additionally supported and are atomic.
+```
+
+示例汇编代码如下：
+```s
+# New comparand is in a1:a0.
+li t0, -1
+la t1, mtimecmp
+sw t0, 0(t1) # No smaller than old value.
+sw a1, 4(t1) # No smaller than new value.
+sw a0, 0(t1) # New value.
+```
+
+用 C 语言实现代码如下：
+```c
+static void write_mtimecmp_low(uint32_t v)
+{
+  *(volatile uint32_t *)(CLINT_CTRL_ADDR + CLINT_MTIMECMP) = v;
+}
+
+static void write_mtimecmp_high(uint32_t v)
+{
+  *(volatile uint32_t *)(CLINT_CTRL_ADDR + CLINT_MTIMECMP + 4) = v;
+}
+
+void write_timecmp_value(uint64_t v)
+{
+    uint32_t high = (v >> 32) & 0xffffffff;
+    uint32_t low = v & 0xffffffff;
+    write_mtimecmp_low(0xffffffff);         // No smaller than old value.
+    write_mtimecmp_high(high);              // No smaller than new value.
+    write_mtimecmp_low(low);                // New value.
+}
+```
+
+
+### 读 MTIME
+软件中常读取 MTIME 的值，并与计时器周期累加后再次写入 MTIMECMP 寄存器，进行周期计时器中断，读 MTIME 在软件开发中经常会用到。
+
+问题代码：
+```c
+static uint32_t mtime_lo(void)
+{
+  return *(volatile uint32_t *)(CLINT_CTRL_ADDR + CLINT_MTIME);
+}
+
+static uint32_t mtime_hi(void)
+{
+  return *(volatile uint32_t *)(CLINT_CTRL_ADDR + CLINT_MTIME + 4);
+}
+
+uint64_t get_timer_value(void)
+{
+    uint32_t hi = mtime_hi();
+    uint32_t lo = mtime_lo();
+    return ((uint64_t)hi << 32) | lo;
+}
+
+```
+
+假设进入 get_timer_value() 函数时，MTIME 当前值为 0x00000050_FFFFFFFF，假如在执行代码 hi = mtime_hi() 和 lo = mtime_lo() 两条语句之间正好产生进位，那么 hi = 0x00000050，lo = 0x00000000。 返回结果是 0x00000050_00000000，预期结果应该是 0x00000051_00000000 ，产生极大的偏差。
+
+在 HiFive1 示例程序 demo_gpio/bsp/env/freedom-e300-hifive1/init.c 实现如下：
+```c
+uint64_t get_timer_value()
+{
+  while (1) {
+    uint32_t hi = mtime_hi();
+    uint32_t lo = mtime_lo();
+    if (hi == mtime_hi())
+      return ((uint64_t)hi << 32) | lo;
+  }
+}
+```
+
+改进后的 get_timer_value() 在读取了 MTIME 的两部分后再次读取高 32 位，并判断有没有进位产生，如果产生进位那么就丢弃本次错误的结果重新读一次，如果没有进位那么结果是可靠的，返回读到的 MTIME 值。

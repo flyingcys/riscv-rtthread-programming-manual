@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2、启动 &mdash; RISC-V RT-Thread 编程指南 0.0.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="3、异常与中断" href="3.html" />
+    <link rel="prev" title="RISC-V 概述" href="1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RISC-V RT-Thread 编程指南
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1.html">RISC-V 概述</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2、启动</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#risc-v">RISC-V 启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cv1800b">CV1800B 启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rt-thread">RT-Thread 内核启动</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1、 RT-Thread初始化入口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2、内核初始化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3、应用线程入口</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">RT-Thread 自动初始化</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">1、自动初始化宏</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2、自动运行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">3、启动顺序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ldkeep">4、ld文件中的KEEP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3.html">3、异常与中断</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.html">4、驱动框架与适配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.html">5、线程切换</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6.html">6、移植</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RISC-V RT-Thread 编程指南</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">2、启动</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/zh_CN/2.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>2、启动<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
+<section id="risc-v">
+<h2>RISC-V 启动<a class="headerlink" href="#risc-v" title="此标题的永久链接"></a></h2>
+<p>[todo]</p>
+</section>
+<section id="cv1800b">
+<h2>CV1800B 启动<a class="headerlink" href="#cv1800b" title="此标题的永久链接"></a></h2>
+<p>[todo]</p>
+</section>
+<section id="rt-thread">
+<h2>RT-Thread 内核启动<a class="headerlink" href="#rt-thread" title="此标题的永久链接"></a></h2>
+<p>在 RT-Thread BSP 工程的中，入口函数为 applications/main.c 文件下的 main 函数，但是这个 main 函数实现的工作很简单，只有一句简单的 <code class="docutils literal notranslate"><span class="pre">rt_kprintfrt_kprintf(&quot;Hello,</span> <span class="pre">RISC-V!\n&quot;);</span></code>，或者在此 main 函数中创建并启动另外一个线程等工作，整个系统就开始正常运行了。但是我们没有添加 RT-Thread 内核相关初始化、启动等代码到我们的工程里面，实际情况是调度器已经正常运行了，这是怎么实现的呢？硬件初始化在哪里完成的呢？</p>
+<section id="id2">
+<h3>1、 RT-Thread初始化入口<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h3>
+<p>我们可以在 src/components.c 文件中看到 <code class="docutils literal notranslate"><span class="pre">#ifdef</span> <span class="pre">RT_USING_USER_MAIN</span></code> 宏定义判断，这个宏是定义在 rtconfig.h文 件内的，而且处于开启状态。该宏需要在 BSP 对应的目录下的 Kconfig 文件中通过 <code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">RT_USING_USER_MAIN</span></code> 启用。
+在该文件中可以看到一下代码</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef __ARMCC_VERSION</span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">$Super$$main</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="cm">/* re-define main function */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">$Sub$$main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">rtthread_startup</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#elif defined(__ICCARM__)</span>
+<span class="cm">/* __low_level_init will auto called by IAR cstartup */</span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">__iar_data_init3</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">__low_level_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// call IAR table copy function.</span>
+<span class="w">    </span><span class="n">__iar_data_init3</span><span class="p">();</span>
+<span class="w">    </span><span class="n">rtthread_startup</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#elif defined(__GNUC__)</span>
+<span class="cm">/* Add -eentry to arm-none-eabi-gcc argument */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">entry</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">rtthread_startup</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>通过 MDK/IAR/GCC 不同的编译器宏判断，调用了 <code class="docutils literal notranslate"><span class="pre">rtthread_startup()</span></code> 函数，熟悉 RT-Thread 开发流程的一看就知道这是标准的内核初始化函数。</p>
+<p>在使用 GCC 编译器的项目中，需要在芯片启动文件中手工调用 <code class="docutils literal notranslate"><span class="pre">entry</span></code> 函数，才能进入内核自动启动流程，相关工作需在移植适配过程中完成。</p>
+</section>
+<section id="id3">
+<h3>2、内核初始化<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">rtthread_startup()</span></code> 是 RT-Thread 初始化函数入口，上面介绍了可通过 <code class="docutils literal notranslate"><span class="pre">#ifdef</span> <span class="pre">RT_USING_USER_MAIN</span></code> 宏自动调用，也可以不启用该宏手工调用。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">rtthread_startup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="n">rt_hw_interrupt_disable</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* board level initalization</span>
+<span class="cm">     * NOTE: please initialize heap inside board initialization.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">rt_hw_board_init</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* show RT-Thread version */</span>
+<span class="w">    </span><span class="n">rt_show_version</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* timer system initialization */</span>
+<span class="w">    </span><span class="n">rt_system_timer_init</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* scheduler system initialization */</span>
+<span class="w">    </span><span class="n">rt_system_scheduler_init</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* create init_thread */</span>
+<span class="w">    </span><span class="n">rt_application_init</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* timer thread initialization */</span>
+<span class="w">    </span><span class="n">rt_system_timer_thread_init</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* idle thread initialization */</span>
+<span class="w">    </span><span class="n">rt_thread_idle_init</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* start scheduler */</span>
+<span class="w">    </span><span class="n">rt_system_scheduler_start</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* never reach here */</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">rtthread_startup()</span></code> 函数完成了以下工作：</p>
+<ul class="simple">
+<li><p>rt_hw_interrupt_disable()：关中断操作。</p></li>
+<li><p>rt_hw_board_init()：该函数定义在 board.c 文件内，完成硬件 tick 定时器、heap 初始化等工作。</p></li>
+<li><p>rt_system_timer_init()/rt_system_timer_thread_init()：timer 初始化/启动。</p></li>
+<li><p>rt_thread_idle_init()：idle 任务创建。</p></li>
+<li><p>rt_application_init()：应用线程初始化。</p></li>
+<li><p>rt_system_scheduler_start()：调度器启动</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>3、应用线程入口<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h3>
+<p>应用线程初始化函数 <code class="docutils literal notranslate"><span class="pre">rt_application_init()</span></code> 在 <code class="docutils literal notranslate"><span class="pre">rtthread_startup()</span></code> 中被调用。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">rt_application_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">rt_thread_t</span><span class="w"> </span><span class="n">tid</span><span class="p">;</span>
+
+<span class="cp">#ifdef RT_USING_HEAP</span>
+<span class="w">    </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rt_thread_create</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main_thread_entry</span><span class="p">,</span><span class="w"> </span><span class="n">RT_NULL</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">RT_MAIN_THREAD_STACK_SIZE</span><span class="p">,</span><span class="w"> </span><span class="n">RT_THREAD_PRIORITY_MAX</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="n">RT_ASSERT</span><span class="p">(</span><span class="n">tid</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">RT_NULL</span><span class="p">);</span>
+<span class="cp">#else</span>
+<span class="w">    </span><span class="n">rt_err_t</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">main_thread</span><span class="p">;</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rt_thread_init</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main_thread_entry</span><span class="p">,</span><span class="w"> </span><span class="n">RT_NULL</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">main_stack</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">main_stack</span><span class="p">),</span><span class="w"> </span><span class="n">RT_THREAD_PRIORITY_MAX</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="n">RT_ASSERT</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RT_EOK</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+<span class="w">    </span><span class="n">rt_thread_startup</span><span class="p">(</span><span class="n">tid</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们可以看到应用线程创建了一个名为 <code class="docutils literal notranslate"><span class="pre">main_thread_entry</span></code> 的任务，并且已经启动了该任务，再次来看一下 <code class="docutils literal notranslate"><span class="pre">main_thread_entry</span></code>  任务。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* the system main thread */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">main_thread_entry</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">parameter</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">extern</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="cp">#ifdef RT_USING_COMPONENTS_INIT</span>
+<span class="w">    </span><span class="cm">/* RT-Thread components initialization */</span>
+<span class="w">    </span><span class="n">rt_components_init</span><span class="p">();</span>
+<span class="cp">#endif </span><span class="cm">/* RT_USING_COMPONENTS_INIT */</span>
+
+<span class="cp">#ifdef RT_USING_SMP</span>
+<span class="w">    </span><span class="n">rt_hw_secondary_cpu_up</span><span class="p">();</span>
+<span class="cp">#endif </span><span class="cm">/* RT_USING_SMP */</span>
+<span class="w">    </span><span class="cm">/* invoke system main function */</span>
+<span class="cp">#ifdef __ARMCC_VERSION</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">extern</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">$Super$$main</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="w">        </span><span class="n">$Super$$main</span><span class="p">();</span><span class="w"> </span><span class="cm">/* for ARMCC. */</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#elif defined(__ICCARM__) || defined(__GNUC__) || defined(__TASKING__) || defined(__TI_COMPILER_VERSION__)</span>
+<span class="w">    </span><span class="n">main</span><span class="p">();</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>man_thread_entry 任务完成了 2 个工作：</p>
+<ul class="simple">
+<li><p>调用 <code class="docutils literal notranslate"><span class="pre">rt_components_init()</span></code>，相关内容可以参考 <a class="reference external" href="#">RT-Thread 自动初始化</a> 一文。</p></li>
+<li><p>进入应用代码真正的 main 函数。</p></li>
+</ul>
+<p>在这里我们看到 MDK 是比较特殊的，是通过调用上面提到的 <code class="docutils literal notranslate"><span class="pre">$$Super$$main()</span></code>回到 <code class="docutils literal notranslate"><span class="pre">main()</span></code> 的，其他编译器是直接调用 <code class="docutils literal notranslate"><span class="pre">main()</span></code> 函数。应用层的 <code class="docutils literal notranslate"><span class="pre">main()</span></code> 函数其实只是 RT-Thread 的一个任务，该任务的优先级为 <code class="docutils literal notranslate"><span class="pre">RT_THREAD_PRIORITY_MAX</span> <span class="pre">/</span> <span class="pre">3</span></code>，任务栈为 <code class="docutils literal notranslate"><span class="pre">RT_MAIN_THREAD_STACK_SIZE</span></code>，默认为 2048 字节。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef RT_USING_USER_MAIN</span>
+<span class="cp">#ifndef RT_MAIN_THREAD_STACK_SIZE</span>
+<span class="cp">#define RT_MAIN_THREAD_STACK_SIZE     2048</span>
+<span class="cp">#endif </span><span class="cm">/* RT_MAIN_THREAD_STACK_SIZE */</span>
+<span class="cp">#ifndef RT_MAIN_THREAD_PRIORITY</span>
+<span class="cp">#define RT_MAIN_THREAD_PRIORITY       (RT_THREAD_PRIORITY_MAX / 3)</span>
+<span class="cp">#endif </span><span class="cm">/* RT_MAIN_THREAD_PRIORITY */</span>
+<span class="cp">#endif </span><span class="cm">/* RT_USING_USER_MAIN */</span>
+</pre></div>
+</div>
+<p>接下来就可以在 <code class="docutils literal notranslate"><span class="pre">main()</span></code> 函数中开始我们自己的工作了。</p>
+</section>
+</section>
+<section id="id5">
+<h2>RT-Thread 自动初始化<a class="headerlink" href="#id5" title="此标题的永久链接"></a></h2>
+<p>在使用 RT-Thread 过程中会遇到很多 <code class="docutils literal notranslate"><span class="pre">INIT_</span></code> 开头的宏，如驱动中的 <code class="docutils literal notranslate"><span class="pre">INIT_BOARD_EXPORT(rt_hw_wifi_init);</span></code>，wlan 框架中的 <code class="docutils literal notranslate"><span class="pre">INIT_PREV_EXPORT(rt_wlan_lwip_init);</span></code>。这些函数看到不到代码里面显式调用，但是在运行中又会运行了，那么它是在哪里被调用的呢？</p>
+<section id="id6">
+<h3>1、自动初始化宏<a class="headerlink" href="#id6" title="此标题的永久链接"></a></h3>
+<p>通过查询对应的宏，在 <code class="docutils literal notranslate"><span class="pre">include/rtdef.h</span></code> 文件中找到了对应的很多类似的宏。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* initialization export */</span>
+<span class="cp">#ifdef RT_USING_COMPONENTS_INIT</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">init_fn_t</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+<span class="w">    </span><span class="cp">#ifdef RT_DEBUGING_INIT</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">rt_init_desc</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">fn_name</span><span class="p">;</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">init_fn_t</span><span class="w"> </span><span class="n">fn</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="cp">#define INIT_EXPORT(fn, level)                                                       \</span>
+<span class="cp">            const char __rti_##fn##_name[] = #fn;                                            \</span>
+<span class="cp">            rt_used const struct rt_init_desc __rt_init_desc_##fn rt_section(&quot;.rti_fn.&quot; level) = \</span>
+<span class="cp">            { __rti_##fn##_name, fn};</span>
+<span class="w">    </span><span class="cp">#else</span>
+<span class="w">        </span><span class="cp">#define INIT_EXPORT(fn, level)                                                       \</span>
+<span class="cp">            rt_used const init_fn_t __rt_init_##fn rt_section(&quot;.rti_fn.&quot; level) = fn</span>
+<span class="w">    </span><span class="cp">#endif</span>
+<span class="cp">#else</span>
+<span class="cp">#define INIT_EXPORT(fn, level)</span>
+<span class="cp">#endif</span>
+
+<span class="cm">/* board init routines will be called in board_init() function */</span>
+<span class="cp">#define INIT_BOARD_EXPORT(fn)           INIT_EXPORT(fn, &quot;1&quot;)</span>
+
+<span class="cm">/* init cpu, memory, interrupt-controller, bus... */</span>
+<span class="cp">#define INIT_CORE_EXPORT(fn)            INIT_EXPORT(fn, &quot;1.0&quot;)</span>
+<span class="cm">/* init pci/pcie, usb platform driver... */</span>
+<span class="cp">#define INIT_FRAMEWORK_EXPORT(fn)       INIT_EXPORT(fn, &quot;1.1&quot;)</span>
+<span class="cm">/* init platform, user code... */</span>
+<span class="cp">#define INIT_PLATFORM_EXPORT(fn)        INIT_EXPORT(fn, &quot;1.2&quot;)</span>
+<span class="cm">/* init sys-timer, clk, pinctrl... */</span>
+<span class="cp">#define INIT_SUBSYS_EXPORT(fn)          INIT_EXPORT(fn, &quot;1.3&quot;)</span>
+<span class="cm">/* init early drivers */</span>
+<span class="cp">#define INIT_DRIVER_EARLY_EXPORT(fn)    INIT_EXPORT(fn, &quot;1.4&quot;)</span>
+
+<span class="cm">/* pre/device/component/env/app init routines will be called in init_thread */</span>
+<span class="cm">/* components pre-initialization (pure software initialization) */</span>
+<span class="cp">#define INIT_PREV_EXPORT(fn)            INIT_EXPORT(fn, &quot;2&quot;)</span>
+<span class="cm">/* device initialization */</span>
+<span class="cp">#define INIT_DEVICE_EXPORT(fn)          INIT_EXPORT(fn, &quot;3&quot;)</span>
+<span class="cm">/* components initialization (dfs, lwip, ...) */</span>
+<span class="cp">#define INIT_COMPONENT_EXPORT(fn)       INIT_EXPORT(fn, &quot;4&quot;)</span>
+<span class="cm">/* environment initialization (mount disk, ...) */</span>
+<span class="cp">#define INIT_ENV_EXPORT(fn)             INIT_EXPORT(fn, &quot;5&quot;)</span>
+<span class="cm">/* application initialization (rtgui application etc ...) */</span>
+<span class="cp">#define INIT_APP_EXPORT(fn)             INIT_EXPORT(fn, &quot;6&quot;)</span>
+
+<span class="cm">/* init after mount fs */</span>
+<span class="cp">#define INIT_FS_EXPORT(fn)              INIT_EXPORT(fn, &quot;6.0&quot;)</span>
+<span class="cm">/* init in secondary_cpu_c_start */</span>
+<span class="cp">#define INIT_SECONDARY_CPU_EXPORT(fn)   INIT_EXPORT(fn, &quot;7&quot;)</span>
+</pre></div>
+</div>
+<p>不同的宏又都被定义到了同一个宏函数 <code class="docutils literal notranslate"><span class="pre">INIT_EXPORT(fn,</span> <span class="pre">level)</span></code>，只有 <code class="docutils literal notranslate"><span class="pre">level</span></code> 对应的数字不同。
+再深入分析可以看到，<code class="docutils literal notranslate"><span class="pre">INIT_EXPORT()</span></code> 通过 <code class="docutils literal notranslate"><span class="pre">RT_USING_COMPONENTS_INIT</span></code> 宏做了区别，使能该宏之后 <code class="docutils literal notranslate"><span class="pre">INIT_EXPORT(fn,</span> <span class="pre">level)</span></code> 函数会被替换为 <code class="docutils literal notranslate"><span class="pre">rt_used</span> <span class="pre">const</span> <span class="pre">init_fn_t</span> <span class="pre">__rt_init_##fn</span> <span class="pre">rt_section(&quot;.rti_fn.&quot;</span> <span class="pre">level)</span> <span class="pre">=</span> <span class="pre">fn</span></code>。</p>
+<p>如 <code class="docutils literal notranslate"><span class="pre">INIT_BOARD_EXPORT(rt_hw_spi_init);</span></code> 通过宏替换和编译器的 <code class="docutils literal notranslate"><span class="pre">##</span></code> 连接符，成为 <code class="docutils literal notranslate"><span class="pre">rt_used</span> <span class="pre">const</span> <span class="pre">init_fn_t</span> <span class="pre">__rt_init_rt_hw_spi_init</span> <span class="pre">rt_section(&quot;.rti_fn.&quot;</span> <span class="pre">1)</span> <span class="pre">=</span> <span class="pre">rt_hw_spi_init;</span></code>。
+其中：</p>
+<ol class="simple">
+<li><p>rt_used</p></li>
+</ol>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define rt_used                     __attribute__((used))</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init_fn_t</span></code> 是指向函数指针。</p></li>
+<li><p>rt_section</p></li>
+</ol>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define rt_section(x)               __attribute__((section(x)))</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">INIT_BOARD_EXPORT(rt_hw_uart_init);</span></code> 宏替换完之后，就是定义了一个指向函数的指针变量 <code class="docutils literal notranslate"><span class="pre">__rt_init_rt_hw_spi_init</span></code>，该变量值为 <code class="docutils literal notranslate"><span class="pre">rt_hw_spi_init</span></code>，同时该变量位于 <code class="docutils literal notranslate"><span class="pre">.rti_fn.1</span></code> 段， 该符号段位于内存分配的 RO 段中。
+分析完之后，还需要实际验证一下。打开 bsp 目录下对应工程编译后的 map 文件，搜索 <code class="docutils literal notranslate"><span class="pre">.rti_fn</span></code> 相关的内容，可以看到以下内容：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">                </span><span class="mh">0x00000000802686a0</span><span class="w">                </span><span class="n">__rt_init_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span>
+<span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">SORT_BY_NAME</span><span class="p">(.</span><span class="n">rti_fn</span><span class="o">*</span><span class="p">))</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.0</span><span class="w">      </span><span class="mh">0x00000000802686a0</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">components</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686a0</span><span class="w">                </span><span class="n">__rt_init_rti_start</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.0</span><span class="p">.</span><span class="n">end</span><span class="w">  </span><span class="mh">0x00000000802686a8</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">components</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686a8</span><span class="w">                </span><span class="n">__rt_init_rti_board_start</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.1</span><span class="w">      </span><span class="mh">0x00000000802686b0</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">ktime</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">hrtimer</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686b0</span><span class="w">                </span><span class="n">__rt_init_rt_ktime_hrtimer_lock_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.1</span><span class="w">      </span><span class="mh">0x00000000802686b8</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">libcpu</span><span class="o">/</span><span class="n">risc</span><span class="o">-</span><span class="n">v</span><span class="o">/</span><span class="n">t</span><span class="o">-</span><span class="n">head</span><span class="o">/</span><span class="n">c906</span><span class="o">/</span><span class="n">backtrace</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686b8</span><span class="w">                </span><span class="n">__rt_init_rt_hw_backtrace_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.1</span><span class="w">      </span><span class="mh">0x00000000802686c0</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">drv_spi</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686c0</span><span class="w">                </span><span class="n">__rt_init_rt_hw_spi_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.1</span><span class="p">.</span><span class="n">end</span><span class="w">  </span><span class="mh">0x00000000802686c8</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">components</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686c8</span><span class="w">                </span><span class="n">__rt_init_rti_board_end</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.2</span><span class="w">      </span><span class="mh">0x00000000802686d0</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">dfs</span><span class="o">/</span><span class="n">dfs_v1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">dfs</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686d0</span><span class="w">                </span><span class="n">__rt_init_dfs_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.2</span><span class="w">      </span><span class="mh">0x00000000802686d8</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">lwp</span><span class="o">/</span><span class="n">lwp_pmutex</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686d8</span><span class="w">                </span><span class="n">__rt_init_pmutex_system_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.2</span><span class="w">      </span><span class="mh">0x00000000802686e0</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">ipc</span><span class="o">/</span><span class="n">workqueue</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686e0</span><span class="w">                </span><span class="n">__rt_init_rt_work_sys_workqueue_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.2</span><span class="w">      </span><span class="mh">0x00000000802686e8</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">sdio</span><span class="o">/</span><span class="n">mmcsd_core</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686e8</span><span class="w">                </span><span class="n">__rt_init_rt_mmcsd_core_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.3</span><span class="w">      </span><span class="mh">0x00000000802686f0</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">tty</span><span class="o">/</span><span class="n">pty</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686f0</span><span class="w">                </span><span class="n">__rt_init_ptmx_register</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.3</span><span class="w">      </span><span class="mh">0x00000000802686f8</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">lwp</span><span class="o">/</span><span class="n">lwp_syscall</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x00000000802686f8</span><span class="w">                </span><span class="n">__rt_init_critical_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.3</span><span class="w">      </span><span class="mh">0x0000000080268700</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">drv_gpio</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268700</span><span class="w">                </span><span class="n">__rt_init_rt_hw_gpio_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.3</span><span class="w">      </span><span class="mh">0x0000000080268708</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">misc</span><span class="o">/</span><span class="n">rt_null</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268708</span><span class="w">                </span><span class="n">__rt_init_null_device_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.3</span><span class="w">      </span><span class="mh">0x0000000080268710</span><span class="w">       </span><span class="mh">0x10</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">misc</span><span class="o">/</span><span class="n">rt_random</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268710</span><span class="w">                </span><span class="n">__rt_init_random_device_init</span>
+<span class="w">                </span><span class="mh">0x0000000080268718</span><span class="w">                </span><span class="n">__rt_init_urandom_device_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.3</span><span class="w">      </span><span class="mh">0x0000000080268720</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">misc</span><span class="o">/</span><span class="n">rt_zero</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268720</span><span class="w">                </span><span class="n">__rt_init_zero_device_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.4</span><span class="w">      </span><span class="mh">0x0000000080268728</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">dfs</span><span class="o">/</span><span class="n">dfs_v1</span><span class="o">/</span><span class="n">filesystems</span><span class="o">/</span><span class="n">elmfat</span><span class="o">/</span><span class="n">dfs_elm</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268728</span><span class="w">                </span><span class="n">__rt_init_elm_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.4</span><span class="w">      </span><span class="mh">0x0000000080268730</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">dfs</span><span class="o">/</span><span class="n">dfs_v1</span><span class="o">/</span><span class="n">filesystems</span><span class="o">/</span><span class="n">romfs</span><span class="o">/</span><span class="n">dfs_romfs</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268730</span><span class="w">                </span><span class="n">__rt_init_dfs_romfs_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.4</span><span class="w">      </span><span class="mh">0x0000000080268738</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">tty</span><span class="o">/</span><span class="n">console</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268738</span><span class="w">                </span><span class="n">__rt_init_rx_thread_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.5</span><span class="w">      </span><span class="mh">0x0000000080268740</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">libc</span><span class="o">/</span><span class="n">posix</span><span class="o">/</span><span class="n">io</span><span class="o">/</span><span class="n">stdio</span><span class="o">/</span><span class="n">stdio</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268740</span><span class="w">                </span><span class="n">__rt_init_rt_posix_stdio_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.6</span><span class="w">      </span><span class="mh">0x0000000080268748</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">components</span><span class="o">/</span><span class="n">finsh</span><span class="o">/</span><span class="n">shell</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268748</span><span class="w">                </span><span class="n">__rt_init_finsh_system_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.6</span><span class="w">      </span><span class="mh">0x0000000080268750</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">drv_spi</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268750</span><span class="w">                </span><span class="n">__rt_init_rt_spi_device_init</span>
+<span class="w"> </span><span class="p">.</span><span class="n">rti_fn</span><span class="mf">.6</span><span class="p">.</span><span class="n">end</span><span class="w">  </span><span class="mh">0x0000000080268758</span><span class="w">        </span><span class="mh">0x8</span><span class="w"> </span><span class="n">build</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">components</span><span class="p">.</span><span class="n">o</span>
+<span class="w">                </span><span class="mh">0x0000000080268758</span><span class="w">                </span><span class="n">__rt_init_rti_end</span>
+<span class="w">                </span><span class="mh">0x0000000080268760</span><span class="w">                </span><span class="n">__rt_init_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">__rt_init_rt_hw_spi_init</span></code> 在 <code class="docutils literal notranslate"><span class="pre">0x00000000802686c0</span></code> 地址。</p>
+</section>
+<section id="id7">
+<h3>2、自动运行<a class="headerlink" href="#id7" title="此标题的永久链接"></a></h3>
+<p>上面介绍了自动初始化的宏及展开后对应的指向函数的指针变量定义，那么真正是在哪里调用这些指向函数的指针的呢？通过宏 <code class="docutils literal notranslate"><span class="pre">RT_USING_COMPONENTS_INIT</span></code> 在 <code class="docutils literal notranslate"><span class="pre">src/components.c</span></code> 文件中可以找到答案。
+该宏需要在 BSP 对应的目录下的 Kconfig 文件中通过 <code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">RT_USING_COMPONENTS_INIT</span></code> 启用。</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rt_components_board_init()</span></code> 函数在 <code class="docutils literal notranslate"><span class="pre">rt_hw_board_init()</span></code> 函数中被调用，<code class="docutils literal notranslate"><span class="pre">rt_hw_board_init()</span></code> 函数需在 bsp 对应的芯片下实现。</p></li>
+</ol>
+<p>代码较简单，就是循环调用 <code class="docutils literal notranslate"><span class="pre">__rt_init_rti_board_start</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__rt_init_rti_board_end</span></code> 之间的函数。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief  Onboard components initialization. In this function, the board-level</span>
+<span class="cm"> *         initialization function will be called to complete the initialization</span>
+<span class="cm"> *         of the on-board peripherals.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">rt_components_board_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="cp">#ifdef RT_DEBUGING_INIT</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">rt_init_desc</span><span class="w"> </span><span class="o">*</span><span class="n">desc</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">__rt_init_desc_rti_board_start</span><span class="p">;</span><span class="w"> </span><span class="n">desc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">__rt_init_desc_rti_board_end</span><span class="p">;</span><span class="w"> </span><span class="n">desc</span><span class="w"> </span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">rt_kprintf</span><span class="p">(</span><span class="s">&quot;initialize %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">desc</span><span class="o">-&gt;</span><span class="n">fn_name</span><span class="p">);</span>
+<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">desc</span><span class="o">-&gt;</span><span class="n">fn</span><span class="p">();</span>
+<span class="w">        </span><span class="n">rt_kprintf</span><span class="p">(</span><span class="s">&quot;:%d done</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#else</span>
+<span class="w">    </span><span class="k">volatile</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">init_fn_t</span><span class="w"> </span><span class="o">*</span><span class="n">fn_ptr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">fn_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">__rt_init_rti_board_start</span><span class="p">;</span><span class="w"> </span><span class="n">fn_ptr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">__rt_init_rti_board_end</span><span class="p">;</span><span class="w"> </span><span class="n">fn_ptr</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="o">*</span><span class="n">fn_ptr</span><span class="p">)();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif </span><span class="cm">/* RT_DEBUGING_INIT */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>你会发现 <code class="docutils literal notranslate"><span class="pre">__rt_init_rti_board_start</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__rt_init_rti_board_end</span></code> 这 2 个变量没有在代码中定义，那么这 2 个变量在哪里呢？答案就是下面这段代码：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">rti_start</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">INIT_EXPORT</span><span class="p">(</span><span class="n">rti_start</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">rti_board_start</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">INIT_EXPORT</span><span class="p">(</span><span class="n">rti_board_start</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0.end&quot;</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">rti_board_end</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">INIT_EXPORT</span><span class="p">(</span><span class="n">rti_board_end</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.end&quot;</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">rti_end</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">INIT_EXPORT</span><span class="p">(</span><span class="n">rti_end</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;6.end&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>上面我们分析过 <code class="docutils literal notranslate"><span class="pre">INIT_EXPORT(fn,</span> <span class="pre">level)</span></code> 这个宏函数，把以上 4 个函数做宏替换后分别为 <code class="docutils literal notranslate"><span class="pre">__rt_init__rti_start</span></code>， <code class="docutils literal notranslate"><span class="pre">__rt_init_rti_board_start</span></code>，<code class="docutils literal notranslate"><span class="pre">__rt_init_rti_board_end</span></code>，<code class="docutils literal notranslate"><span class="pre">__rt_init_rti_end</span></code>。</p>
+<p>所以 <code class="docutils literal notranslate"><span class="pre">rt_components_board_init()</span></code> 函数作用就是将从 <code class="docutils literal notranslate"><span class="pre">INIT_BOARD_EXPORT</span></code> 宏定义的函数开始，到 <code class="docutils literal notranslate"><span class="pre">INIT_PREV_EXPORT</span></code> 宏定义的函数之前的所有函数，依次调用。</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rt_components_init()</span></code> 在内核启动后，进入应用代码之前调用。同样，循环调用 <code class="docutils literal notranslate"><span class="pre">__rt_init_rti_board_end</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__rt_init_rti_end</span></code> 之间的函数。</p></li>
+</ol>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief  RT-Thread Components Initialization.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">rt_components_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="cp">#ifdef RT_DEBUGING_INIT</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">rt_init_desc</span><span class="w"> </span><span class="o">*</span><span class="n">desc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rt_kprintf</span><span class="p">(</span><span class="s">&quot;do components initialization.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">__rt_init_desc_rti_board_end</span><span class="p">;</span><span class="w"> </span><span class="n">desc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">__rt_init_desc_rti_end</span><span class="p">;</span><span class="w"> </span><span class="n">desc</span><span class="w"> </span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">rt_kprintf</span><span class="p">(</span><span class="s">&quot;initialize %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">desc</span><span class="o">-&gt;</span><span class="n">fn_name</span><span class="p">);</span>
+<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">desc</span><span class="o">-&gt;</span><span class="n">fn</span><span class="p">();</span>
+<span class="w">        </span><span class="n">rt_kprintf</span><span class="p">(</span><span class="s">&quot;:%d done</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#else</span>
+<span class="w">    </span><span class="k">volatile</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">init_fn_t</span><span class="w"> </span><span class="o">*</span><span class="n">fn_ptr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">fn_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">__rt_init_rti_board_end</span><span class="p">;</span><span class="w"> </span><span class="n">fn_ptr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">__rt_init_rti_end</span><span class="p">;</span><span class="w"> </span><span class="n">fn_ptr</span><span class="w"> </span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="o">*</span><span class="n">fn_ptr</span><span class="p">)();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif </span><span class="cm">/* RT_DEBUGING_INIT */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>通过 <code class="docutils literal notranslate"><span class="pre">rt_components_board_init()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">rt_components_init()</span></code> 函数，就完成了所有需要自动初始化函数的调用。</p>
+</section>
+<section id="id8">
+<h3>3、启动顺序<a class="headerlink" href="#id8" title="此标题的永久链接"></a></h3>
+<p>在日常使用中，功能的初始化是需要有先后循序的。根据上面的分析，RT-Thread 通过不同的宏完成顺序调用。</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rt_components_board_init()</span></code> 函数较 <code class="docutils literal notranslate"><span class="pre">rt_components_init()</span></code> 先被调用，所以 <code class="docutils literal notranslate"><span class="pre">INIT_BOARD_EXPORT</span></code> 相关的 BOARD 板级资源初始化优先被调用了，主要用于初始化相关的硬件环境，此时调度器尚未启动。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rt_components_init()</span></code> 在调度器启动后被调用，此时硬件环境和操作系统已经初始化完成，可以执行与应用程序相关的代码。
+| 初始化顺序 | 宏接口                      | 描述                                         |
+|———-|——————————-|———————————————-|
+| 1        | INIT_BOARD_EXPORT(fn) | 很早的初始化，调度器尚未启动。                       |
+| 2        | INIT_PREV_EXPORT(fn) | 主要用于纯软件初始化，没有太多依赖关系的函数。             |
+| 3        | INIT_DEVICE_EXPORT(fn) | 外设驱动程序初始化相关，如网络卡设备。                    |
+| 4        | INIT_COMPONENT_EXPORT(fn) | 组件初始化，如文件系统或 LWIP。                        |
+| 5        | INIT_ENV_EXPORT(fn) | 系统环境初始化，如挂载文件系统。                         |
+| 6        | INIT_APP_EXPORT(fn) | 应用程序初始化，如应用程序 GUI。                         |</p></li>
+</ol>
+</section>
+<section id="ldkeep">
+<h3>4、ld文件中的KEEP<a class="headerlink" href="#ldkeep" title="此标题的永久链接"></a></h3>
+<p>我们知道，代码编译过程的最后一步链接，链接器会将我们未使用到的函数优化，不加入到最终的可执行文件中。上面说到的自动初始化的函数都没有被显式调用。如果没有做特殊处理，上面的函数都不会被执行，这里就要用的 ld 文件中的关键字 <code class="docutils literal notranslate"><span class="pre">KEEP</span></code>。</p>
+<p>在所有的 RT-Thread bsp 目录下的工程，以 gcc 工程为例，会在链接文件 <code class="docutils literal notranslate"><span class="pre">.ld</span></code> 或 <code class="docutils literal notranslate"><span class="pre">.lds</span></code> 中加入以下一段语句:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">        </span><span class="cm">/* section information for finsh shell */</span>
+<span class="w">        </span><span class="p">.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ALIGN</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+<span class="w">        </span><span class="n">__fsymtab_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span>
+<span class="w">        </span><span class="n">KEEP</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">FSymTab</span><span class="p">))</span>
+<span class="w">        </span><span class="n">__fsymtab_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span>
+<span class="w">        </span><span class="p">.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ALIGN</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+<span class="w">        </span><span class="n">__vsymtab_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span>
+<span class="w">        </span><span class="n">KEEP</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">VSymTab</span><span class="p">))</span>
+<span class="w">        </span><span class="n">__vsymtab_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span>
+<span class="w">        </span><span class="p">.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ALIGN</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/* section information for initial. */</span>
+<span class="w">        </span><span class="p">.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ALIGN</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+<span class="w">        </span><span class="n">__rt_init_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span>
+<span class="w">        </span><span class="n">KEEP</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">SORT</span><span class="p">(.</span><span class="n">rti_fn</span><span class="o">*</span><span class="p">)))</span>
+<span class="w">        </span><span class="n">__rt_init_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span>
+<span class="w">        </span><span class="p">.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ALIGN</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">__rt_utest_tc_tab_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span>
+<span class="w">        </span><span class="n">KEEP</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">UtestTcTab</span><span class="p">))</span>
+<span class="w">        </span><span class="n">__rt_utest_tc_tab_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span>
+</pre></div>
+</div>
+<p>通过</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">__rt_init_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span>
+<span class="n">KEEP</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">SORT</span><span class="p">(.</span><span class="n">rti_fn</span><span class="o">*</span><span class="p">)))</span>
+<span class="n">__rt_init_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.;</span><span class="n">KEEP</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">SORT</span><span class="p">(.</span><span class="n">rti_fn</span><span class="o">*</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>语句将所有的 <code class="docutils literal notranslate"><span class="pre">.rti_fn*</span></code> 的段，排序后放在 __rt_init_start 和 __rt_init_end 之间，KEEP 关键字强制链接器保留某些特定部分。</p>
+<p>其他的几个段作用分别为：</p>
+<ul class="simple">
+<li><p>FSymTab：shell 相关的符号表</p></li>
+<li><p>VSymTab：v5.x 源码中未找到相关的定义，应该是为了老代码兼容</p></li>
+<li><p>UtestTcTab：utest 相关的符号表</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="1.html" class="btn btn-neutral float-left" title="RISC-V 概述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="3.html" class="btn btn-neutral float-right" title="3、异常与中断" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, 燕十三.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1、RISC-V 概述 &mdash; RISC-V RT-Thread 编程指南 0.0.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="2、启动" href="2.html" />
+    <link rel="prev" title="RISC-V编程指南 – 基于RT-Thread" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RISC-V RT-Thread 编程指南
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">目录</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1、RISC-V 概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1、指令集</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">基本指令集</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">标准扩充指令集</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2.html">2、启动</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.html">3、异常与中断</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.html">4、驱动框架与适配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.html">5、线程切换</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6.html">6、移植</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RISC-V RT-Thread 编程指南</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">1、RISC-V 概述</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/zh_CN/1.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="risc-v">
+<h1>1、RISC-V 概述<a class="headerlink" href="#risc-v" title="此标题的永久链接"></a></h1>
+<section id="id1">
+<h2>1、指令集<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h2>
+<section id="id2">
+<h3>基本指令集<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h3>
+<p>| 指令集名称 | 描述 | 版本 | 状态 |
+| — | — | — | — |
+| RV32I	| 基本整数指令集, 32位元 | 2.1 | 已批准 |
+| RV32E | 基本整数指令集(嵌入式系统), 32位元, 16 个暂存器  | 2.0 | 已批准 |
+| RV64I | 基本整数指令集, 64位元 | 2.1 | 已批准 |
+| RV64E | 基本整数指令集(嵌入式系统), 64位元, 16 个暂存器 | 2.0 | 已批准 |
+| RV128I | 基本整数指令集, 128位元 | 1.7 | 开放 |</p>
+</section>
+<section id="id3">
+<h3>标准扩充指令集<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>指令集名称</th>
+<th>描述</th>
+<th>版本</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M</td>
+<td>整数乘除法标准扩充</td>
+<td>2.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>A</td>
+<td>不可中断指令(Atomic)标准扩充</td>
+<td>2.1</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>F</td>
+<td>单精度浮点标准扩充</td>
+<td>2.2</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>D</td>
+<td>双精度浮点标准扩充</td>
+<td>2.2</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zicsr</td>
+<td>控制与状态寄存器</td>
+<td>2.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zifencei</td>
+<td>指令抓取屏障</td>
+<td>2.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>G</td>
+<td>所有以上的扩充指令集以及基本指令集的总和的简称</td>
+<td>不适用</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>四精度浮点标准扩充</td>
+<td>2.2</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>L</td>
+<td>十进位浮点标准扩充</td>
+<td>0.0</td>
+<td>开放</td>
+</tr>
+<tr>
+<td>C</td>
+<td>压缩指令标准扩充</td>
+<td>2.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>B</td>
+<td>位元运算标准扩充</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>J</td>
+<td>动态指令翻译标准扩充</td>
+<td>0.0</td>
+<td>开放</td>
+</tr>
+<tr>
+<td>T</td>
+<td>顺序记忆体存取标准扩充</td>
+<td>0.0</td>
+<td>开放</td>
+</tr>
+<tr>
+<td>P</td>
+<td>单指令多资料流（SIMD）运算标准扩充</td>
+<td>0.9.10</td>
+<td>开放</td>
+</tr>
+<tr>
+<td>V</td>
+<td>向量运算标准扩充</td>
+<td>1.0</td>
+<td>冻结</td>
+</tr>
+<tr>
+<td>Zk</td>
+<td>标量加密标准扩充</td>
+<td>1.0.1</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>H</td>
+<td>Hypervisor 标准扩充</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>S</td>
+<td>Supervisor 标准扩充</td>
+<td>1.12</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zam</td>
+<td>非对齐不可中断指令标准扩展</td>
+<td>0.1</td>
+<td>开放</td>
+</tr>
+<tr>
+<td>Zihintpause</td>
+<td>暂停提示</td>
+<td>2.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zihintntl</td>
+<td>非时间局部性提示</td>
+<td>0.2</td>
+<td>开放</td>
+</tr>
+<tr>
+<td>Zfa</td>
+<td>额外浮点运算指令标准扩展</td>
+<td>0.1</td>
+<td>开放</td>
+</tr>
+<tr>
+<td>Zfh</td>
+<td>半精度浮点标准扩展</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zfhmin</td>
+<td>半精度浮点最小集标准扩展</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zfinx</td>
+<td>整数寄存器单精度浮点标准扩展</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zdinx</td>
+<td>整数寄存器双精度浮点标准扩展</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zhinx</td>
+<td>整数寄存器半精度浮点标准扩展</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zhinxmin</td>
+<td>整数寄存器半精度浮点最小集标准扩展</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Zmmul</td>
+<td>整数纯乘法标准扩展</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+<tr>
+<td>Ztso</td>
+<td>全存储排序标准扩展</td>
+<td>1.0</td>
+<td>已批准</td>
+</tr>
+</tbody>
+</table></section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="../index.html" class="btn btn-neutral float-left" title="RISC-V编程指南 – 基于RT-Thread" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="2.html" class="btn btn-neutral float-right" title="2、启动" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, 燕十三.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

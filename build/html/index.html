@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RISC-V编程指南 – 基于RT-Thread &mdash; RISC-V RT-Thread 编程指南 0.0.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="1、RISC-V 概述" href="zh_CN/1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            RISC-V RT-Thread 编程指南
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">目录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/1.html">1、RISC-V 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/2.html">2、启动</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/3.html">3、异常与中断</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/4.html">4、驱动框架与适配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/5.html">5、线程切换</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/6.html">6、移植</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">RISC-V RT-Thread 编程指南</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RISC-V编程指南 – 基于RT-Thread</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="risc-v-rt-thread">
+<h1>RISC-V编程指南 – 基于RT-Thread<a class="headerlink" href="#risc-v-rt-thread" title="此标题的永久链接"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">目录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/1.html">1、RISC-V 概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/1.html#id1">1、指令集</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/2.html">2、启动</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/2.html#risc-v">RISC-V 启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/2.html#cv1800b">CV1800B 启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/2.html#rt-thread">RT-Thread 内核启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/2.html#id5">RT-Thread 自动初始化</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/3.html">3、异常与中断</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#id2">1、名词介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#clint">CLINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#clic">CLIC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#plic">PLIC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#id3">2、寄存器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#mtvec-machine-trap-vector">MTVEC（Machine Trap Vector）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#mtvt">MTVT（）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#mepc-machine-exception-pc">MEPC（Machine Exception PC）：指向发生异常的指令。</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#mcause-machine-exception-cause">MCAUSE（Machine Exception Cause）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#mie-machine-interrupt-enable">MIE（Machine Interrupt Enable）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#mip-machine-interrupt-pending">MIP（Machine Interrupt Pending）：列出目前正准备处理的中断。</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#mtval-machine-trap-value-trap-0">MTVAL（Machine Trap Value）：保存了陷入（trap）的附加信息：地址例外中出错的地址、发生非法指令例外的指令本身，对于其他异常，它的值为 0。</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#mscratch-mscratch-machine-scratch">MSCRATCH mscratch（Machine Scratch）：暂时存放一个字大小的数据。</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#mstatus-machine-status">MSTATUS（Machine Status）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#id4">3、异常处理机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#id5">4、异常响应</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#id6">异常处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#id7">异常返回</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#id8">2、中断</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#id9">3、矢量中断与非矢量中断</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/3.html#msh">6、移植第五阶段：msh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/4.html">4、驱动框架与适配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/5.html">5、线程切换</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/5.html#id2">5.1、相关寄存器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/5.html#id4">5.2、相关数据结构与宏</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/5.html#id8">5.3、相关指令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/5.html#id10">5.4、线程栈初始化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/5.html#id11">5.5、无来源线程的上下文切换函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/5.html#id12">5.6、恢复现场</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/5.html#id13">5.7、中断中线程切换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/5.html#id14">5.8、线程和线程间切换</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zh_CN/6.html">6、移植</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/6.html#id2">6.1、相关寄存器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/6.html#freertos">6.2、FreeRTOS 工程梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/6.html#bsp">6.3、移植第一阶段：bsp工程创建与编译</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/6.html#id8">6.4、移植第二阶段：文件打包</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/6.html#id9">6.5、移植第三阶段：中断</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zh_CN/6.html#id14">6.6、移植第四阶段：线程切换</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="此标题的永久链接"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">索引</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">模块索引</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">搜索页面</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="zh_CN/1.html" class="btn btn-neutral float-right" title="1、RISC-V 概述" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, 燕十三.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
