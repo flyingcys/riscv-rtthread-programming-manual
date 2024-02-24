@@ -16,6 +16,12 @@ RISC-V编程指南 -- 基于RT-Thread
    zh_CN/4.md
    zh_CN/5.md
    zh_CN/6.md
+   zh_CN/7.md
+   zh_CN/8.md
+   zh_CN/9.md
+   .. zh_CN/10-0.md
+   .. zh_CN/11-0.md
+   .. zh_CN/111.md
 
 Indices and tables
 ==================

@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'RISC-V RT-Thread 编程指南'
-copyright = '2024, 燕十三'
+copyright = '2024, flyingcys/燕十三'
 author = '燕十三'
 release = '0.0.1'
 
