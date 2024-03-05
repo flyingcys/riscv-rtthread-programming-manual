@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-RISC-V编程指南 -- 基于RT-Thread
+RISC-V编程指南 -- 基于 RT-Thread 与 Milk-v duo
 =================================
 
 .. toctree::
